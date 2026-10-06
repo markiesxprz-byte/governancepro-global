@@ -1,0 +1,7 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GovernancePro Global Admin</title>
+<style>body{font-family:Arial;background:#08111f;color:#eee;padding:30px}table{width:100%;border-collapse:collapse}td,th{padding:9px;border:1px solid #26374d;text-align:left}button{padding:9px}</style></head>
+<body><h1>GovernancePro Global — Lead Dashboard</h1><p>V2 foundation. Protect this route with authentication before production.</p><button onclick="load()">Refresh</button><p id="summary"></p><table><thead><tr><th>Date</th><th>Type</th><th>Company</th><th>Email</th><th>Framework</th><th>Region</th><th>Score</th><th>Status</th></tr></thead><tbody id="rows"></tbody></table>
+<script>
+async function load(){let r=await fetch('/api/leads');if(!r.ok){document.getElementById('summary').textContent='Database/API not configured or access is protected.';return}let d=await r.json(),a=d.leads||[];document.getElementById('summary').textContent=a.length+' lead(s) returned';document.getElementById('rows').innerHTML=a.map(x=>`<tr><td>${new Date(x.created_at).toLocaleString()}</td><td>${x.type||''}</td><td>${x.company||''}</td><td>${x.email||''}</td><td>${x.framework||''}</td><td>${x.region||''}</td><td>${x.score??''}</td><td>${x.lead_status||''}</td></tr>`).join('')}
+load()
+</script></body></html>

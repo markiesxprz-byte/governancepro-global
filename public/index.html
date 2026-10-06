@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GovernancePro Global | ISO • ITSM • COBIT • GRC</title>
+<meta name="description" content="Global ISO, ITSM, COBIT, GRC and IT governance assessment and consulting platform. Assess maturity, understand gaps and connect with a specialist.">
+<style>
+:root{--bg:#07101d;--panel:#0e1a2a;--panel2:#13243a;--text:#eef5ff;--muted:#a9b8ca;--accent:#36d399;--blue:#60a5fa;--line:#26384f}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:linear-gradient(180deg,#06101c,#0b1727);color:var(--text);line-height:1.5}
+a{color:inherit;text-decoration:none}.container{width:min(1180px,92%);margin:auto}
+header{position:sticky;top:0;z-index:10;background:#07101deF;backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{font-weight:900;letter-spacing:.4px}.brand span{color:var(--accent)}nav{display:flex;gap:18px;align-items:center}nav a{font-size:14px;color:var(--muted)}nav a:hover{color:white}
+.btn{display:inline-block;border:0;border-radius:10px;padding:12px 18px;font-weight:800;cursor:pointer}.primary{background:var(--accent);color:#052017}.secondary{background:transparent;border:1px solid var(--line);color:white}
+.hero{padding:88px 0 65px}.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}.eyebrow{color:var(--accent);font-weight:900;font-size:12px;text-transform:uppercase;letter-spacing:1.5px}
+h1{font-size:clamp(42px,6vw,72px);line-height:1.02;margin:14px 0}.hero p{font-size:19px;color:var(--muted);max-width:740px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.score-card{background:linear-gradient(145deg,#11243b,#0d1828);border:1px solid var(--line);border-radius:20px;padding:25px;box-shadow:0 20px 60px #0005}.score{font-size:64px;font-weight:900;color:var(--accent)}
+.meter{height:10px;background:#203047;border-radius:20px;overflow:hidden}.meter i{display:block;height:100%;width:68%;background:linear-gradient(90deg,var(--blue),var(--accent))}
+section{padding:65px 0}.dark{background:#060e19}.section-title{font-size:36px;margin:0 0 10px}.section-sub{color:var(--muted);max-width:800px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px}.card h3{margin-top:0}.card p{color:var(--muted)}
+.tag{display:inline-block;padding:5px 9px;border:1px solid var(--line);border-radius:999px;color:#c7d4e5;font-size:12px;margin:3px}
+.cta{background:linear-gradient(120deg,#10352c,#102947);border:1px solid #275247;border-radius:20px;padding:35px;display:flex;justify-content:space-between;gap:20px;align-items:center}
+form{display:grid;gap:14px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}label{font-size:13px;color:#c6d2df}input,select,textarea{width:100%;margin-top:6px;background:#091524;color:white;border:1px solid var(--line);border-radius:9px;padding:12px}textarea{min-height:100px}
+.modal{display:none;position:fixed;inset:0;background:#000b;z-index:20;padding:25px;overflow:auto}.modal.show{display:block}.modal-box{max-width:820px;margin:40px auto;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:28px}.close{float:right;background:none;border:0;color:white;font-size:24px;cursor:pointer}
+.result{background:#0b1c2d;border:1px solid #2b4c66;border-radius:14px;padding:18px;margin-top:15px}.result strong{color:var(--accent)}.notice{font-size:12px;color:var(--muted)}
+footer{padding:35px 0;color:var(--muted);border-top:1px solid var(--line);font-size:13px}.locale{display:flex;gap:7px;align-items:center}.locale select{margin:0;padding:8px;width:auto}
+@media(max-width:850px){.hero-grid,.grid{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}nav{display:none}.hero{padding-top:55px}.cta{display:block}.locale span{display:none}}
+</style>
+</head>
+<body>
+<header><div class="container nav">
+<a class="brand" href="#">Governance<span>Pro</span> Global</a>
+<nav><a href="#services">Services</a><a href="#how">How it works</a><a href="#pricing">Packages</a><a href="#assessment">Assessment</a></nav>
+<div class="locale"><span>Region</span><select id="region" aria-label="Country or region">
+<option value="ZA">South Africa — ZAR</option><option value="US">United States — USD</option><option value="GB">United Kingdom — GBP</option><option value="EU">Europe — EUR</option><option value="AU">Australia — AUD</option><option value="CA">Canada — CAD</option><option value="AE">UAE / Middle East — AED</option><option value="GLOBAL">Other / Global — USD</option>
+</select><a class="btn primary" href="#assessment">Free Assessment</a></div>
+</div></header>
+
+<main>
+<section class="hero"><div class="container hero-grid">
+<div><div class="eyebrow">ISO • ITSM • COBIT • GRC • IT GOVERNANCE</div>
+<h1>Know where you stand. Know what to fix. Know what it will cost.</h1>
+<p>Assess your organisation's governance, service management and compliance maturity, receive an indicative roadmap and connect with the right specialist — wherever you operate.</p>
+<div class="actions"><a class="btn primary" href="#assessment">Start Free Assessment</a><button class="btn secondary" onclick="openQuote()">Calculate Consulting Cost</button></div>
+<div style="margin-top:24px"><span class="tag">ISO 27001</span><span class="tag">ISO 9001</span><span class="tag">ISO 22301</span><span class="tag">ISO 20000</span><span class="tag">ITSM / ITIL</span><span class="tag">COBIT</span><span class="tag">GRC</span></div>
+</div>
+<div class="score-card"><div class="eyebrow">Example readiness result</div><div class="score">68/100</div><div style="font-weight:800">Managed</div><div class="meter" style="margin:14px 0 18px"><i></i></div>
+<p style="color:var(--muted)">Your assessment highlights priority gaps and maps them to a practical improvement programme.</p>
+<div class="result"><strong>Recommended:</strong><br>ITSM maturity improvement + governance assessment</div></div>
+</div></section>
+
+<section id="services"><div class="container"><div class="eyebrow">What we solve</div><h2 class="section-title">Specialist consulting, packaged for business.</h2><p class="section-sub">Turn complex frameworks into clear business outcomes, defined scopes and transparent indicative investment.</p>
+<div class="grid" style="margin-top:25px">
+<div class="card"><h3>ISO</h3><p>Readiness, gap assessment, implementation, audit preparation and continual improvement.</p><span class="tag">27001</span><span class="tag">9001</span><span class="tag">22301</span><span class="tag">20000</span><span class="tag">45001</span></div>
+<div class="card"><h3>ITSM / ITIL</h3><p>Improve incident, problem, change, request, SLA, service design and continual improvement practices.</p></div>
+<div class="card"><h3>COBIT & Governance</h3><p>Governance, risk, controls, accountability, performance and decision-making assessments.</p></div>
+<div class="card"><h3>GRC & Risk</h3><p>Control frameworks, risk registers, compliance mapping, evidence readiness and assurance support.</p></div>
+<div class="card"><h3>Cybersecurity Governance</h3><p>Governance, policies, risk, control maturity and management reporting without confusing consulting with certification.</p></div>
+<div class="card"><h3>Business Continuity</h3><p>BCMS readiness, impact analysis, continuity planning, exercising and improvement.</p></div>
+</div></div></section>
+
+<section id="how" class="dark"><div class="container"><div class="eyebrow">Simple process</div><h2 class="section-title">From assessment to action.</h2><div class="grid" style="margin-top:25px">
+<div class="card"><h3>01 — Assess</h3><p>Complete a short assessment tailored to your chosen framework.</p></div>
+<div class="card"><h3>02 — Understand</h3><p>Receive a score, priority gaps, recommended programme and indicative investment.</p></div>
+<div class="card"><h3>03 — Connect</h3><p>Request a proposal or consultation with an approved specialist matched to your requirements.</p></div>
+</div></div></section>
+
+<section id="pricing"><div class="container"><div class="eyebrow">Indicative packages</div><h2 class="section-title">Clear starting points.</h2><p class="section-sub">Prices adapt to your selected region. They are planning estimates, not fixed quotations.</p>
+<div class="grid" style="margin-top:25px" id="packages"></div>
+<p class="notice">Indicative pricing only. Final pricing depends on scope, size, complexity, locations, consultant profile and delivery requirements. Prices are not certification fees.</p></div></section>
+
+<section id="assessment" class="dark"><div class="container"><div class="eyebrow">Free assessment</div><h2 class="section-title">Find your maturity score.</h2>
+<p class="section-sub">Your result is indicative and is not a certification, audit opinion or guarantee of certification.</p>
+<div class="card" style="margin-top:25px;max-width:920px"><form id="assessmentForm">
+<div class="form-grid">
+<div><label>Framework<select id="framework"><option>ISO 27001</option><option>ISO 9001</option><option>ISO 22301</option><option>ISO 20000</option><option>ISO 45001</option><option>ITSM</option><option>COBIT</option><option>IT Governance</option><option>GRC</option></select></label></div>
+<div><label>Organisation size<select id="size"><option>1–25</option><option>26–50</option><option>51–100</option><option>101–250</option><option>251–500</option><option>500+</option></select></label></div>
+<div><label>Current documentation<select id="docs"><option>None / very limited</option><option>Basic</option><option>Partially implemented</option><option>Mostly implemented</option><option>Mature</option></select></label></div>
+<div><label>Management support<select id="support"><option>Low</option><option>Moderate</option><option>Good</option><option>Strong</option></select></label></div>
+<div><label>Target timeline<select id="timeline"><option>Not decided</option><option>12+ months</option><option>6–12 months</option><option>3–6 months</option><option>Under 3 months</option></select></label></div>
+<div><label>Implementation need<select id="need"><option>Assessment only</option><option>Roadmap</option><option>Implementation support</option><option>Full implementation</option></select></label></div>
+</div>
+<div><label>Biggest current challenge<textarea id="challenge" placeholder="e.g. inconsistent processes, audit findings, weak governance, certification deadline..."></textarea></label></div>
+<div class="form-grid"><div><label>Your name<input id="name" required autocomplete="name"></label></div><div><label>Company<input id="company" required autocomplete="organization"></label></div>
+<div><label>Email<input id="email" type="email" required autocomplete="email"></label></div><div><label>Telephone<input id="phone" autocomplete="tel"></label></div></div>
+<label style="display:flex;gap:8px;align-items:flex-start"><input id="consent" type="checkbox" required style="width:auto;margin:3px 0"> I agree to be contacted about this assessment and relevant consulting services, subject to the applicable privacy notice.</label>
+<button class="btn primary" type="submit">Calculate My Assessment</button><div id="assessmentResult"></div>
+</form></div></div></section>
+
+<section><div class="container"><div class="cta"><div><div class="eyebrow">Ready to move forward?</div><h2 style="margin:6px 0">Get an indicative consulting estimate.</h2><p style="color:var(--muted);margin:0">Select your region to see a planning range in your local currency.</p></div><button class="btn primary" onclick="openQuote()">Calculate Cost</button></div></div></section>
+</main>
+
+<div id="quoteModal" class="modal"><div class="modal-box"><button class="close" onclick="closeQuote()">×</button><div class="eyebrow">Consulting cost calculator</div><h2>Get an indicative estimate</h2>
+<form id="quoteForm"><div class="form-grid">
+<div><label>Framework<select id="qframework"><option>ISO 27001</option><option>ISO 9001</option><option>ISO 22301</option><option>ISO 20000</option><option>ISO 45001</option><option>ITSM</option><option>COBIT</option><option>IT Governance</option><option>GRC</option></select></label></div>
+<div><label>Organisation size<select id="qsize"><option>1–25</option><option>26–50</option><option>51–100</option><option>101–250</option><option>251–500</option><option>500+</option></select></label></div>
+<div><label>Service<select id="qservice"><option>Assessment</option><option>Readiness / Gap Analysis</option><option>Implementation</option><option>Full Implementation</option><option>Ongoing Advisory</option></select></label></div>
+<div><label>Current maturity<select id="qmaturity"><option>Initial</option><option>Developing</option><option>Defined</option><option>Managed</option><option>Optimised</option></select></label></div></div>
+<button class="btn primary" type="submit">Calculate Estimate</button><div id="quoteResult"></div></form></div></div>
+
+<footer><div class="container">GovernancePro Global • ISO, ITSM, COBIT, GRC & IT governance consulting platform. <span style="float:right">Indicative assessment only • Consulting does not constitute certification.</span></div></footer>
+
+<script>
+const $=id=>document.getElementById(id);
+const regions={
+ ZA:{currency:"ZAR",symbol:"R",factor:1},
+ US:{currency:"USD",symbol:"$",factor:.055},
+ GB:{currency:"GBP",symbol:"£",factor:.043},
+ EU:{currency:"EUR",symbol:"€",factor:.050},
+ AU:{currency:"AUD",symbol:"A$",factor:.085},
+ CA:{currency:"CAD",symbol:"C$",factor:.075},
+ AE:{currency:"AED",symbol:"AED ",factor:.202},
+ GLOBAL:{currency:"USD",symbol:"$",factor:.055}
+};
+const bases={Assessment:7500,"Readiness / Gap Analysis":15000,Implementation:60000,"Full Implementation":100000,"Ongoing Advisory":1500};
+const sizeFactor={"1–25":1,"26–50":1.15,"51–100":1.35,"101–250":1.65,"251–500":2.1,"500+":2.8};
+const maturityFactor={Initial:1.25,Developing:1.15,Defined:1,Managed:.9,Optimised:.8};
+function region(){return regions[$("region").value]||regions.GLOBAL}
+function money(n){let r=region();return r.symbol+Math.round(n*r.factor).toLocaleString()+" "+r.currency}
+function renderPackages(){
+ const r=region();
+ const cards=[["ISO Starter","Assessment + gap analysis + roadmap",7500],["ITSM Maturity","Core service management assessment + roadmap",15000],["COBIT / Governance","Governance, risk, control & performance assessment",25000]];
+ $("packages").innerHTML=cards.map(c=>`<div class="card"><h3>${c[0]}</h3><div style="font-size:28px;font-weight:800">${money(c[2])}</div><p>${c[1]}.</p></div>`).join("");
+}
+$("region").addEventListener("change",renderPackages); renderPackages();
+async function sendLead(payload){
+ try{
+   const r=await fetch("/api/leads",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(payload)});
+   if(r.ok)return true;
+ }catch(e){}
+ // Development fallback only; production should use the API/database.
+ let leads=JSON.parse(localStorage.getItem("gp_leads_v2")||"[]");leads.push({...payload,created:new Date().toISOString(),storage:"browser-fallback"});localStorage.setItem("gp_leads_v2",JSON.stringify(leads));return false;
+}
+function maturityScore(){
+ let docs={"None / very limited":15,Basic:35,"Partially implemented":55,"Mostly implemented":75,Mature:92}[$("docs").value];
+ let support={Low:20,Moderate:45,Good:70,Strong:90}[$("support").value];
+ let time={"Not decided":60,"12+ months":70,"6–12 months":65,"3–6 months":55,"Under 3 months":45}[$("timeline").value];
+ let need={"Assessment only":70,Roadmap:60,"Implementation support":50,"Full implementation":40}[$("need").value];
+ return Math.round((docs+support+time+need)/4);
+}
+function band(s){return s<=20?"Initial":s<=40?"Developing":s<=60?"Defined":s<=80?"Managed":"Optimised"}
+function recommendation(s){return s<50?"Gap assessment + implementation roadmap":s<70?"Readiness assessment + targeted improvement programme":"Optimisation + governance advisory"}
+$("assessmentForm").addEventListener("submit",async e=>{
+ e.preventDefault();let s=maturityScore(),f=$("framework").value, rec=recommendation(s),lead=s<50?"HOT":s<70?"WARM":"NURTURE";
+ const payload={type:"assessment",name:$("name").value,company:$("company").value,email:$("email").value,phone:$("phone").value,framework:f,score:s,band:band(s),leadStatus:lead,challenge:$("challenge").value,region:$("region").value,currency:region().currency,consent:true};
+ const saved=await sendLead(payload);
+ $("assessmentResult").innerHTML=`<div class="result"><div style="font-size:14px;color:#a9b8ca">Your indicative ${f} maturity</div><div style="font-size:44px;font-weight:900;color:var(--accent)">${s}/100</div><strong>${band(s)}</strong><p>Recommended next step: <strong>${rec}</strong>.</p><p>Indicative consulting range: <strong>${money(bases["Readiness / Gap Analysis"]*(s<50?1.4:1))}</strong> and subject to confirmed scope.</p><p class="notice">${saved?"Your assessment was securely submitted.":"Demo mode: API/database is not connected yet."}</p><button class="btn secondary" type="button" onclick="openQuote()">Calculate Indicative Cost</button></div>`;
+});
+function openQuote(){$("quoteModal").classList.add("show")}function closeQuote(){$("quoteModal").classList.remove("show")}
+$("quoteForm").addEventListener("submit",async e=>{
+ e.preventDefault();let base=bases[$("qservice").value],size=sizeFactor[$("qsize").value],mat=maturityFactor[$("qmaturity").value],f=$("qframework").value;
+ if(f==="COBIT"||f==="IT Governance"||f==="GRC")base=Math.max(base,25000);
+ let low=base*size*mat,high=low*1.45;
+ $("quoteResult").innerHTML=`<div class="result"><strong>Indicative investment: ${money(low)} – ${money(high)}</strong><p>This is a planning estimate only. Final pricing depends on confirmed scope, locations, complexity, documentation and delivery requirements.</p></div>`;
+ await sendLead({type:"quote",framework:f,size:$("qsize").value,service:$("qservice").value,maturity:$("qmaturity").value,estimateLow:Math.round(low),estimateHigh:Math.round(high),region:$("region").value,currency:region().currency});
+});
+</script>
+</body></html>
