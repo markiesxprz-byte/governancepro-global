@@ -1,7 +1,697 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GovernancePro Global Admin</title>
-<style>body{font-family:Arial;background:#08111f;color:#eee;padding:30px}table{width:100%;border-collapse:collapse}td,th{padding:9px;border:1px solid #26374d;text-align:left}button{padding:9px}</style></head>
-<body><h1>GovernancePro Global — Lead Dashboard</h1><p>V2 foundation. Protect this route with authentication before production.</p><button onclick="load()">Refresh</button><p id="summary"></p><table><thead><tr><th>Date</th><th>Type</th><th>Company</th><th>Email</th><th>Framework</th><th>Region</th><th>Score</th><th>Status</th></tr></thead><tbody id="rows"></tbody></table>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GovernancePro Global — Admin</title>
+
+<style>
+:root{
+  --bg:#07111f;
+  --panel:#0d1b2d;
+  --panel2:#10233a;
+  --border:#203650;
+  --text:#eef5ff;
+  --muted:#91a4bb;
+  --accent:#42a5ff;
+  --success:#36d399;
+  --warning:#f5b942;
+  --danger:#ff6b6b;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+.container{
+  max-width:1500px;
+  margin:auto;
+  padding:28px;
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  margin-bottom:28px;
+  flex-wrap:wrap;
+}
+
+.brand h1{
+  margin:0;
+  font-size:28px;
+}
+
+.brand p{
+  margin:7px 0 0;
+  color:var(--muted);
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+}
+
+button{
+  border:1px solid var(--border);
+  background:var(--panel2);
+  color:var(--text);
+  padding:10px 16px;
+  border-radius:7px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+button:hover{
+  border-color:var(--accent);
+}
+
+button.primary{
+  background:var(--accent);
+  color:#06101d;
+  border-color:var(--accent);
+}
+
+#message{
+  margin-bottom:20px;
+  color:var(--muted);
+}
+
+.kpis{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  margin-bottom:22px;
+}
+
+.card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:20px;
+}
+
+.card .label{
+  color:var(--muted);
+  font-size:13px;
+  margin-bottom:10px;
+}
+
+.card .value{
+  font-size:30px;
+  font-weight:700;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  margin-bottom:22px;
+}
+
+.panel{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:20px;
+}
+
+.panel h2{
+  margin:0 0 18px;
+  font-size:17px;
+}
+
+.metric{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:9px 0;
+  border-bottom:1px solid var(--border);
+}
+
+.metric:last-child{
+  border-bottom:0;
+}
+
+.metric-name{
+  color:#dce8f6;
+}
+
+.metric-value{
+  font-weight:700;
+}
+
+.table-panel{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.table-header{
+  padding:20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.table-header h2{
+  margin:0;
+  font-size:18px;
+}
+
+.table-wrap{
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:1150px;
+}
+
+th,td{
+  padding:12px 14px;
+  border-top:1px solid var(--border);
+  text-align:left;
+  white-space:nowrap;
+}
+
+th{
+  color:var(--muted);
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  background:#0a1728;
+}
+
+td{
+  font-size:13px;
+}
+
+.status{
+  border:1px solid var(--border);
+  background:#091726;
+  color:var(--text);
+  padding:7px 8px;
+  border-radius:6px;
+}
+
+.badge{
+  display:inline-block;
+  padding:5px 8px;
+  border-radius:5px;
+  background:#162941;
+  color:#cfe3f9;
+  font-size:12px;
+}
+
+.score{
+  font-weight:700;
+}
+
+.empty{
+  text-align:center;
+  padding:30px;
+  color:var(--muted);
+}
+
+.error{
+  color:var(--danger);
+}
+
+.success{
+  color:var(--success);
+}
+
+.small{
+  color:var(--muted);
+  font-size:12px;
+}
+
+@media(max-width:1000px){
+  .kpis{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:600px){
+  .container{
+    padding:16px;
+  }
+
+  .kpis{
+    grid-template-columns:1fr;
+  }
+
+  .brand h1{
+    font-size:23px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+  <div class="brand">
+    <h1>GovernancePro Global</h1>
+    <p>V3 Administrator Dashboard</p>
+  </div>
+
+  <div class="actions">
+    <button class="primary" onclick="loadDashboard()">Refresh Dashboard</button>
+  </div>
+</header>
+
+<div id="message">Loading dashboard...</div>
+
+<section class="kpis">
+
+  <div class="card">
+    <div class="label">Total Leads / Assessments</div>
+    <div class="value" id="total">—</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Average Assessment Score</div>
+    <div class="value" id="avgScore">—</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Indicative Pipeline Low</div>
+    <div class="value" id="pipelineLow">—</div>
+  </div>
+
+  <div class="card">
+    <div class="label">Indicative Pipeline High</div>
+    <div class="value" id="pipelineHigh">—</div>
+  </div>
+
+</section>
+
+<section class="grid">
+
+  <div class="panel">
+    <h2>Leads by Region</h2>
+    <div id="regions"></div>
+  </div>
+
+  <div class="panel">
+    <h2>Lead Status</h2>
+    <div id="statuses"></div>
+  </div>
+
+  <div class="panel">
+    <h2>Frameworks</h2>
+    <div id="frameworks"></div>
+  </div>
+
+</section>
+
+<section class="table-panel">
+
+  <div class="table-header">
+    <div>
+      <h2>Recent Leads</h2>
+      <div class="small">Latest captured assessments and quote requests</div>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Type</th>
+          <th>Name</th>
+          <th>Company</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Framework</th>
+          <th>Score</th>
+          <th>Band</th>
+          <th>Region</th>
+          <th>Service</th>
+          <th>Investment</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody id="rows"></tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+</div>
+
 <script>
-async function load(){let r=await fetch('/api/leads');if(!r.ok){document.getElementById('summary').textContent='Database/API not configured or access is protected.';return}let d=await r.json(),a=d.leads||[];document.getElementById('summary').textContent=a.length+' lead(s) returned';document.getElementById('rows').innerHTML=a.map(x=>`<tr><td>${new Date(x.created_at).toLocaleString()}</td><td>${x.type||''}</td><td>${x.company||''}</td><td>${x.email||''}</td><td>${x.framework||''}</td><td>${x.region||''}</td><td>${x.score??''}</td><td>${x.lead_status||''}</td></tr>`).join('')}
-load()
-</script></body></html>
+
+const STATUS_OPTIONS = [
+  "New",
+  "Warm",
+  "Qualified",
+  "Proposal",
+  "Won",
+  "Lost"
+];
+
+function escapeHtml(value){
+  if(value === null || value === undefined) return "";
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+function formatNumber(value){
+  if(value === null || value === undefined || value === ""){
+    return "—";
+  }
+
+  const number = Number(value);
+
+  if(!Number.isFinite(number)){
+    return escapeHtml(value);
+  }
+
+  return number.toLocaleString();
+}
+
+function formatMoney(value, currency){
+  if(value === null || value === undefined || value === ""){
+    return "—";
+  }
+
+  const number = Number(value);
+
+  if(!Number.isFinite(number)){
+    return escapeHtml(value);
+  }
+
+  return `${escapeHtml(currency || "")} ${number.toLocaleString()}`.trim();
+}
+
+function renderBreakdown(elementId, data){
+
+  const element = document.getElementById(elementId);
+
+  if(!data || typeof data !== "object"){
+    element.innerHTML = '<div class="empty">No data available</div>';
+    return;
+  }
+
+  const entries = Object.entries(data);
+
+  if(!entries.length){
+    element.innerHTML = '<div class="empty">No data available</div>';
+    return;
+  }
+
+  entries.sort((a,b) => Number(b[1]) - Number(a[1]));
+
+  element.innerHTML = entries.map(([name,value]) => `
+    <div class="metric">
+      <span class="metric-name">${escapeHtml(name || "Unknown")}</span>
+      <span class="metric-value">${formatNumber(value)}</span>
+    </div>
+  `).join("");
+}
+
+async function loadStats(){
+
+  const response = await fetch("/api/admin/stats", {
+    credentials:"same-origin"
+  });
+
+  if(!response.ok){
+    throw new Error(`Stats request failed (${response.status})`);
+  }
+
+  return await response.json();
+}
+
+async function loadLeads(){
+
+  const response = await fetch("/api/admin/leads", {
+    credentials:"same-origin"
+  });
+
+  if(!response.ok){
+    throw new Error(`Leads request failed (${response.status})`);
+  }
+
+  return await response.json();
+}
+
+function renderStats(data){
+
+  document.getElementById("total").textContent =
+    formatNumber(data.total);
+
+  document.getElementById("avgScore").textContent =
+    data.avgScore === null || data.avgScore === undefined
+      ? "—"
+      : Number(data.avgScore).toFixed(1);
+
+  document.getElementById("pipelineLow").textContent =
+    formatNumber(data.pipelineLow);
+
+  document.getElementById("pipelineHigh").textContent =
+    formatNumber(data.pipelineHigh);
+
+  renderBreakdown(
+    "regions",
+    data.byRegion || data.regions
+  );
+
+  renderBreakdown(
+    "statuses",
+    data.byStatus || data.statuses
+  );
+
+  renderBreakdown(
+    "frameworks",
+    data.byFramework || data.frameworks
+  );
+}
+
+function renderLeads(data){
+
+  const rows = document.getElementById("rows");
+
+  const leads = Array.isArray(data)
+    ? data
+    : (data.leads || []);
+
+  if(!leads.length){
+
+    rows.innerHTML = `
+      <tr>
+        <td colspan="13" class="empty">
+          No leads found.
+        </td>
+      </tr>
+    `;
+
+    return;
+  }
+
+  rows.innerHTML = leads.map(lead => {
+
+    const status =
+      lead.lead_status ||
+      lead.status ||
+      "New";
+
+    const options = STATUS_OPTIONS.map(option => `
+      <option value="${escapeHtml(option)}"
+        ${option === status ? "selected" : ""}>
+        ${escapeHtml(option)}
+      </option>
+    `).join("");
+
+    const investment =
+      lead.estimate_low !== null &&
+      lead.estimate_low !== undefined
+      ? `${formatMoney(lead.estimate_low,lead.currency)}
+         – ${formatMoney(lead.estimate_high,lead.currency)}`
+      : "—";
+
+    return `
+      <tr>
+
+        <td>
+          ${lead.created_at
+            ? new Date(lead.created_at).toLocaleString()
+            : "—"}
+        </td>
+
+        <td>
+          <span class="badge">
+            ${escapeHtml(lead.type || "—")}
+          </span>
+        </td>
+
+        <td>${escapeHtml(lead.name || "—")}</td>
+
+        <td>${escapeHtml(lead.company || "—")}</td>
+
+        <td>${escapeHtml(lead.email || "—")}</td>
+
+        <td>${escapeHtml(lead.phone || "—")}</td>
+
+        <td>${escapeHtml(lead.framework || "—")}</td>
+
+        <td class="score">
+          ${lead.score !== null &&
+            lead.score !== undefined
+            ? escapeHtml(lead.score)
+            : "—"}
+        </td>
+
+        <td>${escapeHtml(lead.band || "—")}</td>
+
+        <td>${escapeHtml(lead.region || "—")}</td>
+
+        <td>${escapeHtml(lead.service || "—")}</td>
+
+        <td>${investment}</td>
+
+        <td>
+          <select
+            class="status"
+            data-id="${escapeHtml(lead.id)}"
+            onchange="updateStatus(this)">
+            ${options}
+          </select>
+        </td>
+
+      </tr>
+    `;
+
+  }).join("");
+}
+
+async function updateStatus(select){
+
+  const id = select.dataset.id;
+  const status = select.value;
+
+  if(!id){
+    return;
+  }
+
+  select.disabled = true;
+
+  try{
+
+    const response = await fetch(
+      `/api/admin/leads/${encodeURIComponent(id)}`,
+      {
+        method:"PATCH",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        credentials:"same-origin",
+        body:JSON.stringify({
+          lead_status:status
+        })
+      }
+    );
+
+    if(!response.ok){
+      throw new Error(`Update failed (${response.status})`);
+    }
+
+    document.getElementById("message").textContent =
+      `Lead status updated to ${status}.`;
+
+    document.getElementById("message").className =
+      "success";
+
+    setTimeout(() => {
+      document.getElementById("message").className = "";
+    },3000);
+
+  }catch(error){
+
+    document.getElementById("message").textContent =
+      error.message;
+
+    document.getElementById("message").className =
+      "error";
+
+  }finally{
+
+    select.disabled = false;
+
+  }
+}
+
+async function loadDashboard(){
+
+  const message = document.getElementById("message");
+
+  message.textContent = "Loading dashboard...";
+  message.className = "";
+
+  try{
+
+    const [stats,leads] = await Promise.all([
+      loadStats(),
+      loadLeads()
+    ]);
+
+    renderStats(stats);
+    renderLeads(leads);
+
+    message.textContent =
+      `Dashboard loaded successfully • ${
+        Array.isArray(leads)
+          ? leads.length
+          : (leads.leads || []).length
+      } recent leads`;
+
+    message.className = "success";
+
+  }catch(error){
+
+    console.error(error);
+
+    message.textContent =
+      "Unable to load administrator data. Please check your authentication and API configuration.";
+
+    message.className = "error";
+
+  }
+}
+
+loadDashboard();
+
+</script>
+
+</body>
+</html>
