@@ -1,0 +1,13 @@
+{
+  "name": "governancepro-global",
+  "private": true,
+  "type": "module",
+  "description": "GovernancePro Global — assessment, lead capture and SaaS pages on Cloudflare Workers + D1",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test:api": "node tests/api.test.mjs",
+    "test:site": "python3 tests/browser-checks.py http://localhost:8787"
+  },
+  "devDependencies": { "wrangler": "^4.0.0" }
+}

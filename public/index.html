@@ -4,6 +4,12 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>GovernancePro Global | ISO • ITSM • COBIT • GRC</title>
 <meta name="description" content="Global ISO, ITSM, COBIT, GRC and IT governance assessment and consulting platform. Assess maturity, understand gaps and connect with a specialist.">
+<link rel="canonical" href="https://governancepro-global.markiesxprz.workers.dev/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="GovernancePro Global">
+<meta property="og:title" content="GovernancePro Global | ISO • ITSM • COBIT • GRC">
+<meta property="og:description" content="Free governance and ISO readiness self-assessment, indicative consulting estimates and IT governance advisory.">
+<meta property="og:url" content="https://governancepro-global.markiesxprz.workers.dev/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"GovernancePro Global","url":"https://governancepro-global.markiesxprz.workers.dev/","description":"Governance, risk, compliance and ISO readiness assessment and consulting referral platform."}</script>
 <style>
 :root{--bg:#07101d;--panel:#0e1a2a;--panel2:#13243a;--text:#eef5ff;--muted:#a9b8ca;--accent:#36d399;--blue:#60a5fa;--line:#26384f}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:linear-gradient(180deg,#06101c,#0b1727);color:var(--text);line-height:1.5}
@@ -40,23 +46,35 @@ footer{padding:35px 0;color:var(--muted);border-top:1px solid var(--line);font-s
 .itsm-note{color:var(--muted,#a9b8ca);font-size:13px;margin:14px 0 0}
 @media(max-width:900px){.itsm-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){#platform{padding:56px 0}.itsm-grid{grid-template-columns:1fr}.itsm-btn{width:100%;text-align:center}}
+.menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:10px;width:44px;height:44px;padding:0;cursor:pointer;flex-direction:column;justify-content:center;align-items:center;gap:5px}
+.menu-btn span{display:block;width:20px;height:2px;background:var(--text);border-radius:2px}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.skip{position:absolute;left:-9999px;top:0;background:#fff;color:#000;padding:10px 14px;z-index:100;border-radius:0 0 8px 0}.skip:focus{left:0}
+.foot{display:flex;flex-wrap:wrap;gap:28px;justify-content:space-between;align-items:flex-start}.foot ul{list-style:none;margin:0;padding:0;display:flex;gap:18px;flex-wrap:wrap}.foot a{color:var(--muted)}.foot a:hover{color:var(--text)}.foot p{margin:0;color:var(--muted);font-size:13px;max-width:520px}
+.hp{position:absolute;left:-10000px;height:0;overflow:hidden}
+button.btn{font-family:inherit;font-size:inherit}
+@media(max-width:850px){.locale .btn{display:none}.locale select{max-width:150px;padding:9px 8px}.nav{gap:10px}}
+@media(max-width:400px){.brand{font-size:15px}.locale select{max-width:120px}}
+@media(max-width:850px){.nav{position:relative}.menu-btn{display:flex}header.open nav{display:flex;flex-direction:column;align-items:stretch;gap:0;position:absolute;top:100%;left:-4%;right:-4%;background:#07101d;border-bottom:1px solid var(--line);padding:8px 4%}header.open nav a{padding:14px 4px;font-size:16px;border-bottom:1px solid var(--line)}}
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <header><div class="container nav">
-<a class="brand" href="#">Governance<span>Pro</span> Global</a>
-<nav><a href="#services">Services</a><a href="#platform">ITSM Platform</a><a href="#how">How it works</a><a href="#pricing">Packages</a><a href="#assessment">Assessment</a></nav>
+<a class="brand" href="/">Governance<span>Pro</span> Global</a>
+<nav id="siteNav" aria-label="Main"><a href="#services">Services</a><a href="/saas">SaaS Solutions</a><a href="#platform">ITSM Platform</a><a href="#how">How it works</a><a href="#pricing">Packages</a><a href="#assessment">Assessment</a></nav>
 <div class="locale"><span>Region</span><select id="region" aria-label="Country or region">
 <option value="ZA">South Africa — ZAR</option><option value="US">United States — USD</option><option value="GB">United Kingdom — GBP</option><option value="EU">Europe — EUR</option><option value="AU">Australia — AUD</option><option value="CA">Canada — CAD</option><option value="AE">UAE / Middle East — AED</option><option value="GLOBAL">Other / Global — USD</option>
 </select><a class="btn primary" href="#assessment">Free Assessment</a></div>
+<button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="siteNav"><span></span><span></span><span></span></button>
 </div></header>
 
-<main>
+<main id="main" tabindex="-1">
 <section class="hero"><div class="container hero-grid">
 <div><div class="eyebrow">ISO • ITSM • COBIT • GRC • IT GOVERNANCE</div>
 <h1>Know where you stand. Know what to fix. Know what it will cost.</h1>
 <p>Assess your organisation's governance, service management and compliance maturity, receive an indicative roadmap and connect with the right specialist — wherever you operate.</p>
-<div class="actions"><a class="btn primary" href="#assessment">Start Free Assessment</a><button class="btn secondary" onclick="openQuote()">Calculate Consulting Cost</button></div>
+<div class="actions"><a class="btn primary" href="#assessment">Start Free Assessment</a><button class="btn secondary" onclick="openQuote()">Calculate Consulting Cost</button><a class="btn secondary" href="/saas">SaaS Solutions</a></div>
 <div style="margin-top:24px"><span class="tag">ISO 27001</span><span class="tag">ISO 9001</span><span class="tag">ISO 22301</span><span class="tag">ISO 20000</span><span class="tag">ITSM / ITIL</span><span class="tag">COBIT</span><span class="tag">GRC</span></div>
 </div>
 <div class="score-card"><div class="eyebrow">Example readiness result</div><div class="score">68/100</div><div style="font-weight:800">Managed</div><div class="meter" style="margin:14px 0 18px"><i></i></div>
@@ -118,7 +136,8 @@ footer{padding:35px 0;color:var(--muted);border-top:1px solid var(--line);font-s
 <div><label>Biggest current challenge<textarea id="challenge" placeholder="e.g. inconsistent processes, audit findings, weak governance, certification deadline..."></textarea></label></div>
 <div class="form-grid"><div><label>Your name<input id="name" required autocomplete="name"></label></div><div><label>Company<input id="company" required autocomplete="organization"></label></div>
 <div><label>Email<input id="email" type="email" required autocomplete="email"></label></div><div><label>Telephone<input id="phone" autocomplete="tel"></label></div></div>
-<label style="display:flex;gap:8px;align-items:flex-start"><input id="consent" type="checkbox" required style="width:auto;margin:3px 0"> I agree to be contacted about this assessment and relevant consulting services, subject to the applicable privacy notice.</label>
+<label style="display:flex;gap:8px;align-items:flex-start"><input id="consent" type="checkbox" required style="width:auto;margin:3px 0"> I agree to be contacted about this assessment and relevant consulting services, subject to the <a href="/privacy" style="text-decoration:underline">privacy notice</a>.</label>
+<div class="hp" aria-hidden="true"><label>Leave this empty<input id="hp" tabindex="-1" autocomplete="off"></label></div>
 <button class="btn primary" type="submit">Calculate My Assessment</button><div id="assessmentResult"></div>
 </form></div></div></section>
 
@@ -133,7 +152,10 @@ footer{padding:35px 0;color:var(--muted);border-top:1px solid var(--line);font-s
 <div><label>Current maturity<select id="qmaturity"><option>Initial</option><option>Developing</option><option>Defined</option><option>Managed</option><option>Optimised</option></select></label></div></div>
 <button class="btn primary" type="submit">Calculate Estimate</button><div id="quoteResult"></div></form></div></div>
 
-<footer><div class="container">GovernancePro Global • ISO, ITSM, COBIT, GRC & IT governance consulting platform. <span style="float:right">Indicative assessment only • Consulting does not constitute certification.</span></div></footer>
+<footer><div class="container foot">
+<p><strong>GovernancePro Global</strong> • ISO, ITSM, COBIT, GRC &amp; IT governance consulting platform. Self-assessments and cost ranges are indicative only. They are not an audit, accredited certification or legal advice, and do not guarantee a certification outcome.</p>
+<nav aria-label="Footer"><ul><li><a href="/saas">SaaS Solutions</a></li><li><a href="#assessment">Free assessment</a></li><li><a href="/privacy">Privacy notice</a></li><li><a href="/terms">Terms of service</a></li></ul></nav>
+</div></footer>
 
 <script>
 const $=id=>document.getElementById(id);
@@ -158,36 +180,45 @@ function renderPackages(){
  $("packages").innerHTML=cards.map(c=>`<div class="card"><h3>${c[0]}</h3><div style="font-size:28px;font-weight:800">${money(c[2])}</div><p>${c[1]}.</p></div>`).join("");
 }
 $("region").addEventListener("change",renderPackages); renderPackages();
-async function sendLead(payload){
+const CONSENT_VERSION="2026-10-12";
+const escapeHtml=v=>String(v==null?"":v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+// Sends a lead and reports the truth: success only when the server confirmed it saved the record.
+async function postLead(payload){
  try{
-   const r=await fetch("/api/leads",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(payload)});
-   if(r.ok)return true;
- }catch(e){}
- // Development fallback only; production should use the API/database.
- let leads=JSON.parse(localStorage.getItem("gp_leads_v2")||"[]");leads.push({...payload,created:new Date().toISOString(),storage:"browser-fallback"});localStorage.setItem("gp_leads_v2",JSON.stringify(leads));return false;
+  const r=await fetch("/api/leads",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(payload)});
+  let data=null;try{data=await r.json()}catch(e){}
+  if(r.ok&&data&&data.ok)return{ok:true,data};
+  return{ok:false,status:r.status,error:(data&&data.error)||"We could not save your request just now. Please try again in a few minutes."};
+ }catch(e){return{ok:false,status:0,error:"We could not reach the server. Please check your connection and try again."}}
 }
-function maturityScore(){
- let docs={"None / very limited":15,Basic:35,"Partially implemented":55,"Mostly implemented":75,Mature:92}[$("docs").value];
- let support={Low:20,Moderate:45,Good:70,Strong:90}[$("support").value];
- let time={"Not decided":60,"12+ months":70,"6–12 months":65,"3–6 months":55,"Under 3 months":45}[$("timeline").value];
- let need={"Assessment only":70,Roadmap:60,"Implementation support":50,"Full implementation":40}[$("need").value];
- return Math.round((docs+support+time+need)/4);
-}
-function band(s){return s<=20?"Initial":s<=40?"Developing":s<=60?"Defined":s<=80?"Managed":"Optimised"}
-function recommendation(s){return s<50?"Gap assessment + implementation roadmap":s<70?"Readiness assessment + targeted improvement programme":"Optimisation + governance advisory"}
 $("assessmentForm").addEventListener("submit",async e=>{
- e.preventDefault();let s=maturityScore(),f=$("framework").value, rec=recommendation(s),lead=s<50?"HOT":s<70?"WARM":"NURTURE";
- const payload={type:"assessment",name:$("name").value,company:$("company").value,email:$("email").value,phone:$("phone").value,framework:f,score:s,band:band(s),leadStatus:lead,challenge:$("challenge").value,region:$("region").value,currency:region().currency,consent:true};
- const saved=await sendLead(payload);
- $("assessmentResult").innerHTML=`<div class="result"><div style="font-size:14px;color:#a9b8ca">Your indicative ${f} maturity</div><div style="font-size:44px;font-weight:900;color:var(--accent)">${s}/100</div><strong>${band(s)}</strong><p>Recommended next step: <strong>${rec}</strong>.</p><p>Indicative consulting range: <strong>${money(bases["Readiness / Gap Analysis"]*(s<50?1.4:1))}</strong> and subject to confirmed scope.</p><p class="notice">${saved?"Your assessment was securely submitted.":"Demo mode: API/database is not connected yet."}</p><button class="btn secondary" type="button" onclick="openQuote()">Calculate Indicative Cost</button></div>`;
+ e.preventDefault();
+ const btn=e.target.querySelector("button[type=submit]"),label=btn.textContent;btn.disabled=true;btn.textContent="Calculating…";
+ const f=$("framework").value;
+ const res=await postLead({type:"assessment",name:$("name").value.trim(),company:$("company").value.trim(),email:$("email").value.trim(),phone:$("phone").value.trim()||undefined,
+  framework:f,size:$("size").value,answers:{docs:$("docs").value,support:$("support").value,timeline:$("timeline").value,need:$("need").value},
+  challenge:$("challenge").value.trim()||undefined,region:$("region").value,consent:$("consent").checked,consent_version:CONSENT_VERSION,website:$("hp").value});
+ btn.disabled=false;btn.textContent=label;
+ if(!res.ok){
+  $("assessmentResult").innerHTML=`<div class="result" role="alert"><strong>We could not save your assessment.</strong><p>${escapeHtml(res.error)}</p><p class="notice">Nothing was stored. Please try again.</p></div>`;return;
+ }
+ const r=res.data.result;
+ $("assessmentResult").innerHTML=`<div class="result" role="status"><div style="font-size:14px;color:#a9b8ca">Your indicative ${escapeHtml(f)} maturity</div><div style="font-size:44px;font-weight:900;color:var(--accent)">${r.score}/100</div><strong>${escapeHtml(r.band)}</strong><p>Recommended next step: <strong>${escapeHtml(r.recommendation)}</strong>.</p><p>Indicative consulting range: <strong>${money(bases["Readiness / Gap Analysis"]*(r.score<50?1.4:1))}</strong>, subject to confirmed scope. Amounts in other currencies use fixed, indicative conversion rates.</p><p class="notice">Your assessment was saved. This is a self-assessment: it is not an audit, accredited certification or legal advice, and does not guarantee a certification outcome.</p></div>`;
 });
 function openQuote(){$("quoteModal").classList.add("show")}function closeQuote(){$("quoteModal").classList.remove("show")}
-$("quoteForm").addEventListener("submit",async e=>{
+$("quoteForm").addEventListener("submit",e=>{
  e.preventDefault();let base=bases[$("qservice").value],size=sizeFactor[$("qsize").value],mat=maturityFactor[$("qmaturity").value],f=$("qframework").value;
  if(f==="COBIT"||f==="IT Governance"||f==="GRC")base=Math.max(base,25000);
  let low=base*size*mat,high=low*1.45;
- $("quoteResult").innerHTML=`<div class="result"><strong>Indicative investment: ${money(low)} – ${money(high)}</strong><p>This is a planning estimate only. Final pricing depends on confirmed scope, locations, complexity, documentation and delivery requirements.</p></div>`;
- await sendLead({type:"quote",framework:f,size:$("qsize").value,service:$("qservice").value,maturity:$("qmaturity").value,estimateLow:Math.round(low),estimateHigh:Math.round(high),region:$("region").value,currency:region().currency});
+ $("quoteResult").innerHTML=`<div class="result"><strong>Indicative investment: ${money(low)} – ${money(high)}</strong><p>This is a planning estimate only. Final pricing depends on confirmed scope, locations, complexity, documentation and delivery requirements. Amounts in other currencies use fixed, indicative conversion rates, not live exchange rates.</p></div>`;
+ // Anonymous usage record (no contact details). Best effort: the visitor's result never depends on it.
+ postLead({type:"quote",framework:f,size:$("qsize").value,service:$("qservice").value,maturity:$("qmaturity").value,region:$("region").value});
 });
+// Mobile menu
+(function(){const h=document.querySelector("header"),b=$("menuBtn");if(!b)return;
+ const set=o=>{h.classList.toggle("open",o);b.setAttribute("aria-expanded",String(o));b.setAttribute("aria-label",o?"Close menu":"Open menu")};
+ b.addEventListener("click",()=>set(!h.classList.contains("open")));
+ document.querySelectorAll("#siteNav a").forEach(a=>a.addEventListener("click",()=>set(false)));
+ document.addEventListener("keydown",e=>{if(e.key==="Escape")set(false)});})();
 </script>
 </body></html>
