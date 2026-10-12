@@ -23,12 +23,29 @@ form{display:grid;gap:14px}.form-grid{display:grid;grid-template-columns:1fr 1fr
 .result{background:#0b1c2d;border:1px solid #2b4c66;border-radius:14px;padding:18px;margin-top:15px}.result strong{color:var(--accent)}.notice{font-size:12px;color:var(--muted)}
 footer{padding:35px 0;color:var(--muted);border-top:1px solid var(--line);font-size:13px}.locale{display:flex;gap:7px;align-items:center}.locale select{margin:0;padding:8px;width:auto}
 @media(max-width:850px){.hero-grid,.grid{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}nav{display:none}.hero{padding-top:55px}.cta{display:block}.locale span{display:none}}
+/* ===== ITSM Platform section — scoped to #platform and .itsm-*, uses your existing colour variables ===== */
+#platform{padding:84px 0;scroll-margin-top:84px;border-top:1px solid var(--line,#26384f);border-bottom:1px solid var(--line,#26384f);background:linear-gradient(180deg,var(--panel,#0e1a2a),var(--bg,#07101d))}
+.itsm-eyebrow{color:var(--accent,#36d399);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin:0 0 12px}
+#platform h2{margin:0 0 14px}
+.itsm-lead{color:var(--muted,#a9b8ca);max-width:700px;font-size:18px;line-height:1.6;margin:0 0 36px}
+.itsm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.itsm-card{background:var(--panel2,#13243a);border:1px solid var(--line,#26384f);border-radius:16px;padding:22px}
+.itsm-card h3{margin:0 0 6px;font-size:17px;color:var(--text,#eef5ff)}
+.itsm-card p{margin:0;color:var(--muted,#a9b8ca);font-size:14.5px;line-height:1.55}
+.itsm-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.itsm-btn{display:inline-block;padding:13px 22px;border-radius:12px;border:1px solid var(--line,#26384f);color:var(--text,#eef5ff);font-weight:700;text-decoration:none;transition:border-color .15s}
+.itsm-btn:hover{border-color:var(--blue,#60a5fa)}
+.itsm-btn-primary{background:var(--accent,#36d399);border-color:var(--accent,#36d399);color:#04130d}
+.itsm-btn-primary:hover{border-color:var(--text,#eef5ff)}
+.itsm-note{color:var(--muted,#a9b8ca);font-size:13px;margin:14px 0 0}
+@media(max-width:900px){.itsm-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){#platform{padding:56px 0}.itsm-grid{grid-template-columns:1fr}.itsm-btn{width:100%;text-align:center}}
 </style>
 </head>
 <body>
 <header><div class="container nav">
 <a class="brand" href="#">Governance<span>Pro</span> Global</a>
-<nav><a href="#services">Services</a><a href="#how">How it works</a><a href="#pricing">Packages</a><a href="#assessment">Assessment</a></nav>
+<nav><a href="#services">Services</a><a href="#platform">ITSM Platform</a><a href="#how">How it works</a><a href="#pricing">Packages</a><a href="#assessment">Assessment</a></nav>
 <div class="locale"><span>Region</span><select id="region" aria-label="Country or region">
 <option value="ZA">South Africa — ZAR</option><option value="US">United States — USD</option><option value="GB">United Kingdom — GBP</option><option value="EU">Europe — EUR</option><option value="AU">Australia — AUD</option><option value="CA">Canada — CAD</option><option value="AE">UAE / Middle East — AED</option><option value="GLOBAL">Other / Global — USD</option>
 </select><a class="btn primary" href="#assessment">Free Assessment</a></div>
@@ -57,6 +74,26 @@ footer{padding:35px 0;color:var(--muted);border-top:1px solid var(--line);font-s
 <div class="card"><h3>Business Continuity</h3><p>BCMS readiness, impact analysis, continuity planning, exercising and improvement.</p></div>
 </div></div></section>
 
+<section id="platform">
+  <div class="container">
+    <p class="itsm-eyebrow">Service Management Platform</p>
+    <h2>Run the service desk you just assessed.</h2>
+    <p class="itsm-lead">Infovantage ITSM is the software behind our ITSM work: the core ITIL processes in one tool, sized for teams without a dedicated ITIL administrator. Requesters are always free; you pay only for the agents working the queue.</p>
+    <div class="itsm-grid">
+      <div class="itsm-card"><h3>Incidents</h3><p>Log, triage and resolve interruptions with SLA timers and internal notes.</p></div>
+      <div class="itsm-card"><h3>Service Requests</h3><p>A service catalog with built-in approval routing.</p></div>
+      <div class="itsm-card"><h3>Problems</h3><p>Track root causes and known errors through to a permanent fix.</p></div>
+      <div class="itsm-card"><h3>Changes</h3><p>Standard, normal and emergency changes with risk levels and backout plans.</p></div>
+      <div class="itsm-card"><h3>CMDB</h3><p>Configuration items and dependencies, so you know what breaks when something fails.</p></div>
+      <div class="itsm-card"><h3>Knowledge Base</h3><p>Self-service articles that resolve common issues before they become tickets.</p></div>
+    </div>
+    <div class="itsm-actions">
+      <a class="itsm-btn itsm-btn-primary" href="https://itsm.markiesxprz.workers.dev/start" rel="noopener">Start your free month</a>
+      <a class="itsm-btn" href="https://itsm.markiesxprz.workers.dev/pricing" rel="noopener">See pricing</a>
+    </div>
+    <p class="itsm-note">Free for your first month, then from R199 per agent per month. Requesters are always free. Workspaces are set up by hand, usually within one business day.</p>
+  </div>
+</section>
 <section id="how" class="dark"><div class="container"><div class="eyebrow">Simple process</div><h2 class="section-title">From assessment to action.</h2><div class="grid" style="margin-top:25px">
 <div class="card"><h3>01 — Assess</h3><p>Complete a short assessment tailored to your chosen framework.</p></div>
 <div class="card"><h3>02 — Understand</h3><p>Receive a score, priority gaps, recommended programme and indicative investment.</p></div>
