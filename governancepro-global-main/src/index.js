@@ -3,7 +3,7 @@ import { maturityScore, band, recommendation, temperature, estimateZar } from '.
 import { clientIp, hashKey, rateHit, rateCheck, rateClear, checkAdmin, json, BASE_HEADERS, csvCell } from './lib/security.js';
 import { ensureSchema } from './lib/migrate.js';
 
-const VERSION = '3.2';
+const VERSION = '3.3';
 const SERVICE = 'GovernancePro Global';
 
 export default {
@@ -224,7 +224,8 @@ const BUSINESS_CATEGORIES = [
   'Customer experience and retention', 'Business development and market expansion',
   'Project and programme delivery', 'Administration and management processes',
   'Digital transformation and business automation', 'Enterprise risk and business continuity',
-  'Tendering, subcontracting and commercial opportunities', 'Other business challenge'
+  'Tendering, subcontracting and commercial opportunities', 'Technology, systems and IT reliability',
+  'Other business challenge'
 ];
 const IMPACT_FIELDS = ['impact_financial', 'impact_operations', 'impact_customers', 'impact_people', 'impact_compliance'];
 const BUSINESS_TEXT_FIELDS = [
@@ -233,7 +234,7 @@ const BUSINESS_TEXT_FIELDS = [
   ['affected_areas', 800, false], ['previous_actions', 1200, false], ['evidence', 1800, false],
   ['constraints', 1200, false], ['name', 120, false], ['email', 254, false]
 ];
-function businessRecommendations(category, severity) {
+function businessRecommendations(category, severity, themes) {
   const common = [
     { priority: 'Immediate', action: 'Confirm the problem statement and appoint one accountable business owner.', timeframe: 'Within 2 business days', measure: 'Named owner and agreed problem statement' },
     { priority: 'High', action: 'Collect baseline evidence, quantify impact and validate the leading root-cause hypotheses before committing to a major solution.', timeframe: 'Within 7 days', measure: 'Baseline and evidence log approved by the owner' },
@@ -256,10 +257,72 @@ function businessRecommendations(category, severity) {
     'Digital transformation and business automation': 'Document the current process and controls first, then assess whether process redesign, automation or a simple tool is the best fit.',
     'Enterprise risk and business continuity': 'Document the key disruption scenarios, critical activities, dependencies, controls and practical recovery priorities.',
     'Tendering, subcontracting and commercial opportunities': 'Check eligibility, mandatory documents, bid capacity, delivery risk, pricing assumptions, partner responsibilities and commercial margin.',
+    'Technology, systems and IT reliability': 'Establish an incident log for the failing systems, identify the most frequent failure points and agree service targets with whoever runs them (internal team or vendor).',
     'Other business challenge': 'Break the problem into observable symptoms, affected processes, evidence gaps and testable root-cause hypotheses.'
   };
-  common.splice(1, 0, { priority: severity === 'Critical' ? 'Immediate' : 'High', action: specific[category] || specific['Other business challenge'], timeframe: severity === 'Critical' ? 'Within 48 hours' : 'Within 10 business days', measure: 'Category-specific findings documented and validated against evidence' });
-  return common;
+  const themed = (themes || []).map((t) => ({ priority: t.timeframe === 'Immediate' || (severity === 'Critical' && /48 hours|this week|1 week/.test(t.timeframe)) ? 'Immediate' : 'High',
+    action: t.action, timeframe: t.timeframe, measure: t.measure, basis: `Based on what you described: ${t.label.toLowerCase()}` }));
+  const categoryStep = { priority: severity === 'Critical' ? 'Immediate' : 'High', action: specific[category] || specific['Other business challenge'], timeframe: severity === 'Critical' ? 'Within 48 hours' : 'Within 10 business days', measure: 'Category-specific findings documented and validated against evidence', basis: `Standard step for: ${category}` };
+  // Owner first, then what the user described, then the category step, then the generic governance steps.
+  // Keep the plan to 7 steps or fewer: when 3+ themes were found, drop the generic baseline step (the themed steps carry their own measures).
+  const generic = themed.length >= 3 ? common.slice(2) : common.slice(1);
+  // Skip the category step when a themed step already covers the same ground (avoids two near-identical steps).
+  const covered = (themes || []).some((t) => (t.covers || []).includes(category));
+  const middle = [...themed, ...(covered ? [] : [categoryStep])].sort((x, y) => (x.priority === 'Immediate' ? 0 : 1) - (y.priority === 'Immediate' ? 0 : 1));
+  return [common[0], ...middle, ...generic];
+}
+
+// Theme detection — reads what the user actually wrote so the plan reflects their situation, not just the category.
+// Each theme: id, label, patterns (tested against problem/affected/evidence/constraints/previous actions), and an action.
+const BUSINESS_THEMES = [
+  { id: 'change_control', weight: 80, covers: ['Technology, systems and IT reliability'], label: 'Uncontrolled changes', re: /\b(untested|without testing|no testing|push(ed|es)? (changes|updates)|deploy(ment|ed|s)?|release[sd]?|change (process|control|management))\b/i,
+    action: 'Introduce a basic change-control gate: every change to production (including vendor changes) needs a scheduled window, a test sign-off and a rollback plan.', timeframe: 'Within 2 weeks', measure: 'No unapproved changes in production for 30 days' },
+  { id: 'detection', weight: 75, label: 'Failures detected late', re: /\b(learn(s|ed)? about|find out|found out|calling in|phone(s|d)? in|users? (report|tell|complain)|not (aware|notified)|no (monitoring|alerts?))\b/i,
+    action: 'Put monitoring and alerting on the failing process so the team finds out before users or customers do.', timeframe: 'Within 2 weeks', measure: 'Majority of failures detected by the team before the first user report' },
+  { id: 'vendor', weight: 60, label: 'Vendor / supplier dependency', re: /\b(vendors?|service providers?|third[- ]part(y|ies)|outsourc\w*|managed service|msp|(supplier|vendor) (contract|sla|performance|failed|failing|delays?))\b/i,
+    action: 'Review the vendor or supplier contract for service levels, change obligations and penalties, and hold a formal performance review backed by your incident or delivery data.', timeframe: 'Within 3 weeks', measure: 'Documented performance review with agreed corrective actions and dates' },
+  { id: 'integration', weight: 70, label: 'Data or system sync problems', re: /\b(sync\w*|out of sync|integration|interface|batch (run|job)|reconcil\w*|mismatch\w*|duplicate records?)\b/i,
+    action: 'Add a daily reconciliation check between the connected systems with a named owner for exceptions, and log every sync failure with its cause.', timeframe: 'Within 1 week', measure: 'Daily reconciliation completed with exceptions cleared within one business day' },
+  { id: 'manual', weight: 45, label: 'Manual / spreadsheet processes', re: /\b(manual(ly)?|spreadsheets?|excel|paper[- ]based|by hand|re-?keying|re-?captur\w*)\b/i,
+    action: 'Document the manual steps, then remove the highest-volume or highest-error step first, with a template, a simple tool or a system you already own, before buying anything new.', timeframe: 'Within 30 days', measure: 'Cycle time or error rate of the targeted step reduced against baseline' },
+  { id: 'receivables', weight: 74, label: 'Slow collections / debtors', re: /\b(debtors?|receivables?|late pay\w*|pay(s|ing)? (at|after) \d+|overdue|age analysis|credit control|collections?|\d+\s*-\s*\d+\s*days)\b/i,
+    action: 'Set up weekly credit control: work the age analysis from oldest and largest down, escalate disputed invoices, and test whether invoice discounting or supply-chain finance is available for slow-paying clients.', timeframe: 'Start this week', measure: 'Debtor days and the over-90-day balance reduced month on month' },
+  { id: 'invoicing', weight: 68, label: 'Invoicing delays', re: /\b(invoic\w*)\b[^.]{0,80}\b(late|delay\w*|weeks? after|days? after|behind|backlog)\b|\b(late|delay\w*)\b[^.]{0,40}\binvoic\w*/i,
+    action: 'Invoice within 48 hours of job sign-off: make the sign-off document the trigger and track the time from completion to invoice weekly.', timeframe: 'Within 2 weeks', measure: 'Average time from completion to invoice under 2 business days' },
+  { id: 'liquidity', weight: 95, covers: ['Financial management and cash flow'], label: 'Liquidity pressure', re: /\b(overdraft|facility|cannot pay|can't pay|unable to pay|cash (shortfall|crunch|squeeze)|run(ning)? out of cash)\b/i,
+    action: 'Build a 13-week rolling cash-flow forecast, prioritise payments (payroll, statutory, critical suppliers) and speak to key suppliers early about terms before payments are missed.', timeframe: 'Within 48 hours', measure: 'Weekly cash forecast in use and no unplanned missed payments' },
+  { id: 'payroll', weight: 100, label: 'Payroll / statutory payment risk', re: /\b(salar(y|ies)|payroll|wages?)\b[^.]{0,60}\b(late|delay\w*|miss\w*)\b|\b(delay\w*|late|miss\w*)\b[^.]{0,40}\b(salar(y|ies)|payroll|wages?)\b|\b(tax|vat|paye|uif|sars)\b[^.]{0,40}\b(late|arrears|behind|penalt\w*)\b/i,
+    action: 'Treat late salaries or statutory payments as a priority legal and people risk: ring-fence those payments in the forecast and get qualified labour or tax advice before it happens again.', timeframe: 'Immediate', measure: 'Payroll and statutory payments made on time every cycle' },
+  { id: 'capacity', weight: 50, label: 'Capacity / key-person dependency', re: /\b(only (one|1|two|2)|one (admin|person)|single person|team of [1-3]\b|short[- ]staffed|understaffed|overloaded|no capacity|key person)\b/i,
+    action: 'Reduce key-person risk: document the critical tasks, cross-train a backup and free capacity by stopping or deferring low-value work.', timeframe: 'Within 30 days', measure: 'Each critical task has a documented procedure and a trained backup' },
+  { id: 'stock', weight: 55, label: 'Stock accuracy', re: /\b(stock[- ]?outs?|stock levels?|inventory|over-?order\w*|write-?offs?|shrinkage)\b/i,
+    action: 'Run cycle counts on the fast-moving lines and track stock accuracy weekly, so the cost of the problem is measured rather than estimated.', timeframe: 'Within 2 weeks', measure: 'Stock accuracy measured weekly on top lines against an agreed target' },
+  { id: 'complaints', weight: 55, covers: ['Customer experience and retention'], label: 'Customer complaints', re: /\b(complain\w*|churn\w*|cancel\w*|refunds?|bad reviews?|customer (loss|losing))\b/i,
+    action: 'Log and categorise every complaint for 4 weeks to find the top two themes, then fix the process behind them.', timeframe: 'Start this week', measure: 'Top complaint themes identified with an owner and fix date' },
+  { id: 'compliance', weight: 90, covers: ['Governance, internal controls and compliance'], label: 'Regulatory exposure', re: /\b(regulator|audit (finding|issue)s?|non-?complian\w*|popia|gdpr|licen[cs]e condition|fine[sd]?|penalt\w*)\b/i,
+    action: 'List the specific obligations at risk, map each to a control owner and evidence, and get qualified advice on any reporting duties.', timeframe: 'Within 2 weeks', measure: 'Obligations register with owners and evidence for each control' }
+];
+const MONEY_OR_METRIC = /(\bR\s?\d|\$\s?\d|£\s?\d|€\s?\d|\d+(\.\d+)?\s?(%|percent|m\b|k\b|million|days|hours|per (week|month|day)|times))/i;
+function detectThemes(b) {
+  const text = ['problem', 'affected_areas', 'evidence', 'constraints', 'previous_actions', 'desired_outcome']
+    .map((f) => (typeof b[f] === 'string' ? b[f] : '')).join(' \n ');
+  return BUSINESS_THEMES.filter((t) => t.re.test(text)).sort((x, y) => y.weight - x.weight).slice(0, 4);
+}
+function scoreDrivers(b) {
+  const parts = [
+    ['Financial impact', b.impact_financial, 0.30 * 65], ['Operational impact', b.impact_operations, 0.25 * 65],
+    ['Customer impact', b.impact_customers, 0.15 * 65], ['People impact', b.impact_people, 0.15 * 65],
+    ['Compliance / reputation impact', b.impact_compliance, 0.15 * 65], ['Urgency', b.urgency, 25], ['Recurrence', b.recurrence, 10]
+  ];
+  return parts.map(([label, rating, max]) => ({ label, rating, points: Math.round((rating - 1) / 4 * max * 10) / 10, max: Math.round(max * 10) / 10 }))
+    .sort((x, y) => y.points - x.points);
+}
+function assessConfidence(b) {
+  const evidence = (b.evidence || '').trim();
+  const quantified = MONEY_OR_METRIC.test(`${b.problem || ''} ${evidence}`);
+  if (evidence.length >= 40 && quantified) return 'Moderate — evidence and figures supplied, but self-reported and not independently verified';
+  if (evidence.length >= 40 || quantified) return 'Low to moderate — some evidence or figures supplied; validate before acting on estimates';
+  return 'Low — based on ratings only; further evidence required';
 }
 async function createBusinessAssessment(request, env, db) {
   const raw = await request.text();
@@ -289,8 +352,10 @@ async function createBusinessAssessment(request, env, db) {
   const rawScore = (impact - 1) / 4 * 65 + (b.urgency - 1) / 4 * 25 + (b.recurrence - 1) / 4 * 10;
   const score = Math.max(0, Math.min(100, Math.round(rawScore)));
   const severity = score >= 75 ? 'Critical' : score >= 55 ? 'High' : score >= 30 ? 'Medium' : 'Low';
-  const confidence = (b.evidence && b.evidence.trim().length >= 80) ? 'Moderate — evidence supplied but not independently verified' : 'Low — further evidence required';
-  const recommendations = businessRecommendations(b.category, severity);
+  const confidence = assessConfidence(b);
+  const themes = detectThemes(b);
+  const drivers = scoreDrivers(b);
+  const recommendations = businessRecommendations(b.category, severity, themes);
   const id = crypto.randomUUID();
   const now = new Date().toISOString();
   try {
@@ -305,7 +370,8 @@ async function createBusinessAssessment(request, env, db) {
         b.impact_financial, b.impact_operations, b.impact_customers, b.impact_people, b.impact_compliance,
         b.urgency, b.recurrence, b.evidence?.trim() || null, b.constraints?.trim() || null,
         b.name?.trim() || null, email, hasContact ? 1 : 0, severity, score, confidence, JSON.stringify(recommendations)).run();
-    return json({ ok: true, id, created_at: now, score, severity, confidence, recommendations,
+    return json({ ok: true, id, created_at: now, score, severity, confidence, recommendations, drivers,
+      themes: themes.map((t) => t.label), previous_actions: b.previous_actions?.trim() || null,
       note: 'This is an initial rules-based triage, not a verified diagnosis. Validate causes and estimates with evidence.' }, 201);
   } catch (e) {
     console.error('business assessment save failed:', e && e.message);
