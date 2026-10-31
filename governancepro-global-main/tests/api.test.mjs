@@ -31,7 +31,7 @@ const assess = (over = {}) => ({ type: 'assessment', ...A, answers: answers('Bas
 
 // ------------------------------------------------------------------------------------------ health
 let r = await req('GET', '/api/health');
-t('health: ok, version 3.2, database reachable', r.status === 200 && r.data.ok && r.data.version === '3.2' && r.data.database === 'ok', r.text);
+t('health: ok, version 3.3, database reachable', r.status === 200 && r.data.ok && r.data.version === '3.3' && r.data.database === 'ok', r.text);
 
 // ------------------------------------------------------------------------------------------ public pages
 for (const p of ['/saas', '/privacy', '/terms', '/business', '/site.css', '/sitemap.xml', '/robots.txt']) {
