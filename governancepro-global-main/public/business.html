@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Business Problem Assessment & Resolution | GovernancePro Global</title>
+<meta name="description" content="Assess non-ITSM business challenges, prioritise risks and receive an initial, practical resolution roadmap.">
+<link rel="canonical" href="https://governancepro-global.markiesxprz.workers.dev/business">
+<link rel="stylesheet" href="/site.css">
+<style>
+.hero-business{padding:56px 0 36px}.form-section{margin:20px 0}.field-hint{color:var(--muted);font-size:13px;margin:4px 0 0}.rating-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.result-panel{margin-top:24px}.result-panel h3{margin-top:18px}.priority{display:inline-block;padding:4px 10px;border-radius:99px;background:#3a2d0b;color:var(--amber);font-weight:800;font-size:12px}.priority.critical{background:#3a1414;color:#ffb4b4}.priority.low{background:#0b3a2c;color:var(--accent)}.action-item{padding:14px 0;border-bottom:1px solid var(--line)}.action-item:last-child{border-bottom:0}.result-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.required{color:var(--amber)}@media(max-width:650px){.rating-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="container nav">
+<a class="brand" href="/">Governance<span>Pro</span> Global</a>
+<nav id="siteNav" aria-label="Main navigation"><a href="/">Home</a><a href="/#services">Services</a><a href="/saas">SaaS Solutions</a><a href="/#assessment">ISO / Governance Assessment</a><a href="/business" aria-current="page">Business Solutions</a></nav>
+<button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="siteNav"><span></span><span></span><span></span></button>
+</div></header>
+<main>
+<section class="hero-business"><div class="container">
+<div class="eyebrow">Business Solutions</div>
+<h1>Identify the problem. Find the cause. Build the solution.</h1>
+<p class="lead">Describe a business challenge outside ITSM. GovernancePro Global will produce an initial priority assessment and a practical set of next steps for investigation and improvement.</p>
+<div class="actions"><a class="btn secondary" href="#assessmentForm">Start assessment</a><a class="btn secondary" href="/#services">Explore consulting</a></div>
+<p class="small muted">This is an initial rules-based triage, not an independently verified diagnosis or professional legal, tax or accounting advice. Avoid entering passwords, special-category personal data or unnecessary confidential information.</p>
+</div></section>
+<section class="alt"><div class="container">
+<div class="eyebrow">Structured assessment</div><h2>Tell us about the business challenge</h2>
+<p class="section-sub">Fields marked * are required. Impact ratings range from 1 (minimal) to 5 (severe). Unknown details can be left blank.</p>
+<form id="assessmentForm" class="card" novalidate>
+<div class="form-section"><h3>1. Organisation and problem</h3>
+<div class="form-grid">
+<div class="field"><label for="category">Business problem category *</label><select id="category" required>
+<option value="">Choose a category</option>
+<option>Business strategy and planning</option><option>Financial management and cash flow</option><option>Sales, revenue and profitability</option><option>Marketing and customer acquisition</option><option>Operations and productivity</option><option>Human resources and workforce performance</option><option>Procurement and supplier management</option><option>Governance, internal controls and compliance</option><option>Customer experience and retention</option><option>Business development and market expansion</option><option>Project and programme delivery</option><option>Administration and management processes</option><option>Digital transformation and business automation</option><option>Enterprise risk and business continuity</option><option>Tendering, subcontracting and commercial opportunities</option><option>Other business challenge</option>
+</select></div>
+<div class="field"><label for="organisation">Organisation name</label><input id="organisation" maxlength="160" autocomplete="organization"></div>
+<div class="field"><label for="industry">Industry</label><input id="industry" maxlength="120" placeholder="e.g. professional services, retail, public sector"></div>
+<div class="field"><label for="region">Country / region</label><select id="region"><option value="ZA">South Africa</option><option value="GB">United Kingdom</option><option value="US">United States</option><option value="EU">Europe</option><option value="AU">Australia</option><option value="CA">Canada</option><option value="AE">UAE / Middle East</option><option value="GLOBAL">Other / Global</option></select></div>
+<div class="field"><label for="size">Organisation size</label><select id="size"><option value="">Not specified</option><option>1–25 employees</option><option>26–50 employees</option><option>51–100 employees</option><option>101–250 employees</option><option>251–500 employees</option><option>500+ employees</option></select></div>
+<div class="field"><label for="started">When did the problem start?</label><select id="started"><option value="">Not sure</option><option>Within the last week</option><option>Within the last month</option><option>1–6 months ago</option><option>More than 6 months ago</option></select></div>
+<div class="field"><label for="frequency">How often does it occur?</label><select id="frequency"><option value="">Not sure</option><option>One-off</option><option>Occasionally</option><option>Weekly</option><option>Daily</option><option>Continuous / ongoing</option></select></div>
+</div>
+<div class="field"><label for="problem">Describe the business problem *</label><textarea id="problem" rows="4" maxlength="2500" required placeholder="What is happening? Who or what is affected? What evidence do you have?"></textarea><p class="field-hint">Be specific about observable symptoms. Do not include passwords or sensitive personal information.</p></div>
+<div class="field"><label for="areas">Departments, customers or processes affected</label><textarea id="areas" rows="2" maxlength="800" placeholder="e.g. sales team, invoice approvals, repeat customers"></textarea></div>
+<div class="field"><label for="outcome">What outcome do you want?</label><textarea id="outcome" rows="2" maxlength="1200" placeholder="e.g. reduce overdue invoices, improve conversion, shorten delivery time"></textarea></div>
+</div>
+<div class="form-section"><h3>2. Impact and urgency</h3>
+<p class="field-hint">Choose a rating for each area. These are self-reported ratings, not verified measurements.</p>
+<div class="rating-grid">
+<div class="field"><label for="financial">Financial impact *</label><select id="financial" required><option value="1">1 — Minimal / none known</option><option value="2">2 — Low</option><option value="3" selected>3 — Moderate</option><option value="4">4 — High</option><option value="5">5 — Severe / threatens viability</option></select></div>
+<div class="field"><label for="operations">Operational impact *</label><select id="operations" required><option value="1">1 — Minimal</option><option value="2">2 — Low</option><option value="3" selected>3 — Moderate</option><option value="4">4 — High</option><option value="5">5 — Severe</option></select></div>
+<div class="field"><label for="customers">Customer impact *</label><select id="customers" required><option value="1">1 — Minimal</option><option value="2">2 — Low</option><option value="3" selected>3 — Moderate</option><option value="4">4 — High</option><option value="5">5 — Severe</option></select></div>
+<div class="field"><label for="people">Employee / people impact *</label><select id="people" required><option value="1">1 — Minimal</option><option value="2">2 — Low</option><option value="3" selected>3 — Moderate</option><option value="4">4 — High</option><option value="5">5 — Severe</option></select></div>
+<div class="field"><label for="compliance">Compliance / reputation impact *</label><select id="compliance" required><option value="1">1 — Minimal / none known</option><option value="2">2 — Low</option><option value="3" selected>3 — Moderate</option><option value="4">4 — High</option><option value="5">5 — Severe</option></select></div>
+<div class="field"><label for="urgency">How quickly must action begin? *</label><select id="urgency" required><option value="1">1 — No immediate pressure</option><option value="2">2 — Within 3 months</option><option value="3" selected>3 — Within 1 month</option><option value="4">4 — Within 1 week</option><option value="5">5 — Immediate</option></select></div>
+<div class="field"><label for="recurrence">How persistent / recurring is it? *</label><select id="recurrence" required><option value="1">1 — One-off</option><option value="2">2 — Rare</option><option value="3" selected>3 — Sometimes</option><option value="4">4 — Frequent</option><option value="5">5 — Persistent</option></select></div>
+</div>
+<div class="field"><label for="evidence">Evidence or measurements available</label><textarea id="evidence" rows="3" maxlength="1800" placeholder="e.g. monthly sales trend, late-delivery figures, complaint patterns, cost records"></textarea></div>
+<div class="field"><label for="previous">What have you tried so far?</label><textarea id="previous" rows="2" maxlength="1200"></textarea></div>
+<div class="field"><label for="constraints">Known constraints</label><textarea id="constraints" rows="2" maxlength="1200" placeholder="e.g. budget, deadlines, staff capacity, contract restrictions"></textarea></div>
+</div>
+<div class="form-section"><h3>3. Optional consultation request</h3>
+<div class="form-grid"><div class="field"><label for="name">Your name</label><input id="name" maxlength="120" autocomplete="name"></div><div class="field"><label for="email">Email address</label><input id="email" type="email" maxlength="254" autocomplete="email"></div></div>
+<div class="check"><input type="checkbox" id="consent"><label for="consent">I agree that GovernancePro Global / its consulting team may contact me about this assessment, subject to the <a href="/privacy" style="text-decoration:underline">privacy notice</a>. Required only if I provide contact details.</label></div>
+<div class="hp" aria-hidden="true"><label>Leave empty<input id="website" tabindex="-1" autocomplete="off"></label></div>
+</div>
+<div id="formMessage" role="status" aria-live="polite"></div>
+<button class="btn primary" type="submit" id="submitBtn">Assess business problem</button>
+</form>
+<div id="result" class="card result-panel" hidden aria-live="polite"></div>
+</div></section>
+</main>
+<footer><div class="container foot"><p><strong>GovernancePro Global</strong> • Business problem triage and consulting support. Findings are initial, rules-based suggestions; validate causes, costs and obligations with appropriate evidence and qualified advisers.</p><nav aria-label="Footer"><ul><li><a href="/">Home</a></li><li><a href="/saas">SaaS Solutions</a></li><li><a href="/privacy">Privacy notice</a></li><li><a href="/terms">Terms of service</a></li></ul></nav></div></footer>
+<script>
+const $=id=>document.getElementById(id);
+const esc=v=>String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+const CONSENT_VERSION='2026-10-31';
+$('assessmentForm').addEventListener('submit',async e=>{
+ e.preventDefault();
+ const form=e.currentTarget, btn=$('submitBtn'), msg=$('formMessage'), result=$('result');
+ if(!form.reportValidity())return;
+ const name=$('name').value.trim(), email=$('email').value.trim();
+ if((name||email)&&!$('consent').checked){msg.className='alert err';msg.textContent='Please tick the consent box to request follow-up when contact details are provided.';return;}
+ if(email&&!$('email').checkValidity()){msg.className='alert err';msg.textContent='Please enter a valid email address.';return;}
+ const num=id=>Number($(id).value);
+ const payload={
+ category:$('category').value, organisation:$('organisation').value.trim(), industry:$('industry').value.trim(), region:$('region').value,
+ size:$('size').value, problem:$('problem').value.trim(), started_when:$('started').value, frequency:$('frequency').value,
+ desired_outcome:$('outcome').value.trim(), affected_areas:$('areas').value.trim(), previous_actions:$('previous').value.trim(),
+ impact_financial:num('financial'), impact_operations:num('operations'), impact_customers:num('customers'), impact_people:num('people'),
+ impact_compliance:num('compliance'), urgency:num('urgency'), recurrence:num('recurrence'), evidence:$('evidence').value.trim(),
+ constraints:$('constraints').value.trim(), name:name||undefined, email:email||undefined, consent:$('consent').checked,
+ consent_version:CONSENT_VERSION, website:$('website').value
+ };
+ btn.disabled=true;btn.textContent='Assessing and saving…';msg.className='';msg.textContent='';
+ try{
+  const response=await fetch('/api/business-assessments',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload)});
+  const data=await response.json().catch(()=>null);
+  if(!response.ok||!data?.ok)throw new Error(data?.error||'The assessment could not be saved. Please try again.');
+  const actions=data.recommendations.map((a,i)=>`<div class="action-item"><div><span class="priority ${data.severity==='Critical'?'critical':data.severity==='Low'?'low':''}">${esc(a.priority)}</span> <strong>${i+1}. ${esc(a.action)}</strong></div><p class="small">Timeframe: ${esc(a.timeframe)}<br>Success measure: ${esc(a.measure)}</p></div>`).join('');
+  result.hidden=false;
+  result.innerHTML=`<div class="eyebrow">Initial assessment saved</div><h2>Business problem triage</h2><p><strong>Reference:</strong> ${esc(data.id)}</p><p><span class="priority ${data.severity==='Critical'?'critical':data.severity==='Low'?'low':''}">${esc(data.severity)} priority</span> &nbsp; <strong>${esc(data.score)}/100</strong></p><div class="meter"><i style="width:${Math.max(0,Math.min(100,data.score))}%"></i></div><p><strong>Confidence:</strong> ${esc(data.confidence)}</p><p>${esc(data.note)}</p><h3>Recommended next steps</h3>${actions}<h3>What to validate next</h3><ul><li>Confirm the problem and baseline with records or other evidence.</li><li>Interview the people closest to the affected process.</li><li>Test the likely root causes before approving major expenditure.</li><li>Assign an accountable owner and review progress against agreed KPIs.</li></ul><p class="small">The score is a triage aid based on the ratings supplied. It is not a diagnosis, audit opinion, legal conclusion or financial guarantee.</p><div class="result-actions"><button class="btn primary" type="button" onclick="window.print()">Print / Save as PDF</button><a class="btn secondary" href="/#services">Explore consulting services</a><button class="btn secondary" type="button" onclick="location.reload()">Start another assessment</button></div>`;
+  result.scrollIntoView({behavior:'smooth',block:'start'});
+ }catch(err){msg.className='alert err';msg.textContent=err.message||'Something went wrong.';}
+ finally{btn.disabled=false;btn.textContent='Assess business problem';}
+});
+(function(){const h=document.querySelector('header'),b=$('menuBtn');if(!b)return;const set=o=>{h.classList.toggle('open',o);b.setAttribute('aria-expanded',String(o));b.setAttribute('aria-label',o?'Close menu':'Open menu')};b.addEventListener('click',()=>set(!h.classList.contains('open')));document.querySelectorAll('#siteNav a').forEach(a=>a.addEventListener('click',()=>set(false)));document.addEventListener('keydown',e=>{if(e.key==='Escape')set(false)});})();
+</script>
+</body></html>
